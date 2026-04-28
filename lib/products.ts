@@ -38,7 +38,7 @@ export const PRODUCTS: Product[] = [
     category: 'cookware',
     base_price: 1799,
     compare_at_price: 2499,
-    images: ['/images/skillet-1.svg', '/images/skillet-2.svg'],
+    images: ['/images/skillet-1.jpg', '/images/skillet-2.jpg'],
     highlights: [
       '26cm cooking surface, 4cm sides',
       'Triple-coat ceramic, PFOA-free',
@@ -77,7 +77,7 @@ export const PRODUCTS: Product[] = [
     category: 'cookware',
     base_price: 1999,
     compare_at_price: 2799,
-    images: ['/images/kadhai-1.svg', '/images/kadhai-2.svg'],
+    images: ['/images/kadhai-1.jpg', '/images/kadhai-2.jpg'],
     highlights: [
       '2.5L capacity, 24cm rim',
       'Pure cast iron, naturally non-stick over time',
@@ -116,7 +116,7 @@ export const PRODUCTS: Product[] = [
     category: 'utensils',
     base_price: 599,
     compare_at_price: 799,
-    images: ['/images/spoons-1.svg', '/images/spoons-2.svg'],
+    images: ['/images/spoons-1.jpg', '/images/spoons-2.jpg'],
     highlights: [
       'Set of 3 — flat, slotted, ladle',
       'Sustainably harvested teak',
@@ -148,7 +148,7 @@ export const PRODUCTS: Product[] = [
     category: 'serveware',
     base_price: 999,
     compare_at_price: 1299,
-    images: ['/images/bowl-1.svg', '/images/bowl-2.svg'],
+    images: ['/images/bowl-1.jpg', '/images/bowl-2.jpg'],
     highlights: [
       '1.4L capacity, 22cm rim',
       'Hand-thrown stoneware, Khurja',
@@ -187,7 +187,7 @@ export const PRODUCTS: Product[] = [
     category: 'storage',
     base_price: 1199,
     compare_at_price: 1499,
-    images: ['/images/masala-1.svg', '/images/masala-2.svg'],
+    images: ['/images/masala-1.jpg', '/images/masala-2.jpg'],
     highlights: [
       '7 inner tins, ~75g capacity each',
       '304-grade stainless, food safe',
@@ -219,7 +219,7 @@ export const PRODUCTS: Product[] = [
     category: 'tools',
     base_price: 1499,
     compare_at_price: 1999,
-    images: ['/images/knife-1.svg', '/images/knife-2.svg'],
+    images: ['/images/knife-1.jpg', '/images/knife-2.jpg'],
     highlights: [
       '20cm forged blade, 56 HRC',
       'X50CrMov15 German steel',

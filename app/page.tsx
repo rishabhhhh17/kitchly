@@ -45,7 +45,7 @@ export default function HomePage() {
 
           <div className="relative aspect-[4/5] overflow-hidden rounded-pebble bg-cream-200 shadow-lift">
             <Image
-              src="/images/hero.svg"
+              src="/images/hero.jpg"
               alt="A stoneware bowl with wooden spoons on a warm linen tablecloth"
               fill
               priority
@@ -90,7 +90,7 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-wrap gap-10 px-5 py-20 md:grid-cols-2 md:items-center md:gap-16 md:px-8 md:py-28">
           <div className="relative aspect-square overflow-hidden rounded-pebble bg-cream-200">
             <Image
-              src="/images/mission.svg"
+              src="/images/mission.jpg"
               alt="A potter shaping clay on a wheel"
               fill
               sizes="(min-width: 768px) 50vw, 100vw"
