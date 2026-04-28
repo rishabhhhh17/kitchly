@@ -33,7 +33,7 @@ export default function HomePage() {
               <div className="h-8 w-px bg-cream-200" />
               <div>
                 <div className="font-semibold text-ink-900">Free shipping</div>
-                <div className="text-xs">on orders over ₹1,499</div>
+                <div className="text-xs">across India, every order</div>
               </div>
               <div className="h-8 w-px bg-cream-200" />
               <div>
@@ -58,7 +58,7 @@ export default function HomePage() {
 
       <Marquee
         items={[
-          'Free shipping over ₹1,499',
+          'Free shipping, every order',
           '2-year warranty on cookware',
           'Made in India',
           'PFOA-free non-stick',
@@ -117,7 +117,7 @@ export default function HomePage() {
           The pieces you'll keep, the prices you'll like.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-ink-700/80">
-          Build a kitchen that lasts. Shop the full range — every piece backed by a 30-day return.
+          Build a kitchen that lasts. Shop the full range — free shipping, every order.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link href="/products" className="btn-primary">Shop the range</Link>

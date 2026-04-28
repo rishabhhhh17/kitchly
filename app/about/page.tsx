@@ -39,8 +39,8 @@ export default function AboutPage() {
               p: 'On all cookware. If a non-stick coating fails or a handle loosens, we replace it. No paperwork.'
             },
             {
-              h: '30-day returns',
-              p: 'Try it for a month. If it does not earn its counter spot, we will pick it up at our cost.'
+              h: 'Free shipping',
+              p: 'Across India, every order. No minimum, no codes — packed in two working days.'
             }
           ].map((b) => (
             <div key={b.h} className="rounded-pebble bg-cream-50 p-6">

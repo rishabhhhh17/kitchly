@@ -24,8 +24,8 @@ type IncomingShipping = {
   country: string;
 };
 
-const SHIPPING_FLAT_PAISE = 9900;
-const FREE_SHIPPING_THRESHOLD_PAISE = 149900;
+// Free shipping across India, every order.
+const SHIPPING_FLAT_PAISE = 0;
 
 export async function POST(req: NextRequest) {
   let body: any;
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  const shipping_paise = subtotal >= FREE_SHIPPING_THRESHOLD_PAISE ? 0 : SHIPPING_FLAT_PAISE;
+  const shipping_paise = SHIPPING_FLAT_PAISE;
   const total = subtotal + shipping_paise;
   const event_id = randomUUID();
   const receipt = `KCH-${Date.now().toString(36).toUpperCase()}`;

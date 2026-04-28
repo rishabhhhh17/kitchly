@@ -143,7 +143,7 @@ export function ConfirmationClient({ orderId }: { orderId: string }) {
         <ol className="mt-3 space-y-2 text-sm text-ink-800">
           <li>1. We pack your order within 2 working days.</li>
           <li>2. Email <a href="mailto:hello@kitchly.co.in" className="btn-link">hello@kitchly.co.in</a> with your order ID for tracking.</li>
-          <li>3. 30-day no-questions returns. We'll cover the pickup.</li>
+          <li>3. All orders ship free, anywhere in India.</li>
         </ol>
       </div>
 

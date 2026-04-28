@@ -19,8 +19,7 @@ type Form = {
   pincode: string;
 };
 
-const SHIPPING_FLAT_PAISE = 9900;
-const FREE_SHIPPING_THRESHOLD_PAISE = 149900;
+const SHIPPING_FLAT_PAISE = 0;
 
 declare global {
   interface Window {
@@ -32,7 +31,7 @@ export default function CheckoutPage() {
   const { lines, totalPaise, clear } = useCart();
   const router = useRouter();
   const subtotal = totalPaise();
-  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD_PAISE ? 0 : SHIPPING_FLAT_PAISE;
+  const shipping = SHIPPING_FLAT_PAISE;
   const total = subtotal + shipping;
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);

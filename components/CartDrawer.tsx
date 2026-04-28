@@ -120,7 +120,7 @@ export function CartDrawer() {
                 <span className="text-base font-semibold text-ink-900">{formatRupees(subtotal)}</span>
               </div>
               <p className="mb-4 text-xs text-ink-700/60">
-                Shipping calculated at checkout. Free over ₹1,499.
+                Free shipping across India, every order.
               </p>
               <Link
                 href="/checkout"

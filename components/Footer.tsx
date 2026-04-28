@@ -35,7 +35,7 @@ export function Footer() {
           <div>
             <div className="text-xs font-semibold uppercase tracking-[0.18em] text-cream-200/60">Help</div>
             <ul className="mt-4 space-y-2 text-sm">
-              <li><Link href="/shipping" className="hover:text-clay-400">Shipping & returns</Link></li>
+              <li><Link href="/shipping" className="hover:text-clay-400">Shipping</Link></li>
               <li><Link href="/privacy" className="hover:text-clay-400">Privacy policy</Link></li>
               <li><Link href="/terms" className="hover:text-clay-400">Terms of service</Link></li>
             </ul>

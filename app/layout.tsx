@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: '%s · Kitchly'
   },
   description:
-    'Heirloom-grade cookware, utensils and serveware made for Indian kitchens. Free shipping on orders over ₹1,499.',
+    'Heirloom-grade cookware, utensils and serveware made for Indian kitchens. Free shipping across India, every order.',
   openGraph: {
     title: 'Kitchly — Kitchen tools that earn their counter spot',
     description:
