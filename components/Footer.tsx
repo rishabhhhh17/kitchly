@@ -42,7 +42,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-cream-200/10 pt-6 text-xs text-cream-200/50 md:flex-row md:items-center">
+        <div className="mt-12 rounded-soft border border-cream-200/15 px-5 py-4 text-center text-sm text-cream-100">
+          Use code{' '}
+          <span className="font-mono font-semibold text-clay-400">WELCOME15</span>{' '}
+          for <span className="font-semibold">15% off</span> your first order.
+        </div>
+
+        <div className="mt-6 flex flex-col items-start justify-between gap-4 border-t border-cream-200/10 pt-6 text-xs text-cream-200/50 md:flex-row md:items-center">
           <div>© {new Date().getFullYear()} Kitchly. Crafted in India.</div>
           <div>kitchly.co.in · hello@kitchly.co.in</div>
         </div>

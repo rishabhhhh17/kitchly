@@ -5,11 +5,25 @@ import Link from 'next/link';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/lib/cart-store';
 import { formatRupees } from '@/lib/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export function CartDrawer() {
-  const { lines, isOpen, setOpen, setQuantity, removeLine, totalPaise } = useCart();
+  const {
+    lines,
+    isOpen,
+    setOpen,
+    setQuantity,
+    removeLine,
+    totalPaise,
+    discountCode,
+    discountPaise,
+    finalTotalPaise,
+    applyCode,
+    removeCode,
+  } = useCart();
   const subtotal = totalPaise();
+  const discount = discountPaise();
+  const total = finalTotalPaise();
 
   useEffect(() => {
     if (isOpen) document.body.style.overflow = 'hidden';
@@ -115,11 +129,31 @@ export function CartDrawer() {
             </div>
 
             <div className="border-t border-cream-200 px-6 py-5">
-              <div className="mb-3 flex items-center justify-between text-sm text-ink-700/80">
+              <div className="mb-2 flex items-center justify-between text-sm text-ink-700/80">
                 <span>Subtotal</span>
-                <span className="text-base font-semibold text-ink-900">{formatRupees(subtotal)}</span>
+                <span className="font-medium text-ink-900">{formatRupees(subtotal)}</span>
               </div>
-              <p className="mb-4 text-xs text-ink-700/60">
+              {discountCode && discount > 0 ? (
+                <div className="mb-2 flex items-center justify-between text-sm text-clay-600">
+                  <span>
+                    Discount{' '}
+                    <span className="font-mono text-xs">({discountCode})</span>
+                  </span>
+                  <span className="font-medium">−{formatRupees(discount)}</span>
+                </div>
+              ) : null}
+              <div className="mb-3 flex items-center justify-between text-sm">
+                <span className="text-ink-900">Total</span>
+                <span className="text-base font-semibold text-ink-900">
+                  {formatRupees(total)}
+                </span>
+              </div>
+              <CouponInput
+                discountCode={discountCode}
+                applyCode={applyCode}
+                removeCode={removeCode}
+              />
+              <p className="mb-4 mt-4 text-xs text-ink-700/60">
                 Free shipping across India, every order.
               </p>
               <Link
@@ -134,5 +168,77 @@ export function CartDrawer() {
         )}
       </aside>
     </div>
+  );
+}
+
+function CouponInput({
+  discountCode,
+  applyCode,
+  removeCode,
+}: {
+  discountCode: string | null;
+  applyCode: (code: string) => { ok: true } | { ok: false; error: string };
+  removeCode: () => void;
+}) {
+  const [value, setValue] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  if (discountCode) {
+    return (
+      <div className="flex items-center justify-between rounded-soft border border-clay-500/30 bg-clay-500/10 px-3 py-2 text-xs">
+        <span className="text-ink-900">
+          Code applied:{' '}
+          <span className="font-mono font-semibold">{discountCode}</span>
+        </span>
+        <button
+          type="button"
+          onClick={removeCode}
+          aria-label="Remove discount code"
+          className="rounded-full p-1 text-ink-700 hover:bg-cream-200"
+        >
+          <X className="h-3.5 w-3.5" />
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        setError(null);
+        const result = applyCode(value);
+        if (result.ok) setValue('');
+        else setError(result.error);
+      }}
+      className="flex flex-col gap-1"
+    >
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value.toUpperCase());
+            if (error) setError(null);
+          }}
+          placeholder="Discount code"
+          autoComplete="off"
+          spellCheck={false}
+          className="flex-1 rounded-soft border border-cream-200 bg-white px-3 py-2 text-sm uppercase tracking-wider focus:border-clay-500 focus:outline-none"
+        />
+        <button
+          type="submit"
+          disabled={!value.trim()}
+          className="rounded-soft bg-ink-900 px-4 text-sm font-medium text-cream-50 hover:bg-ink-800 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Apply
+        </button>
+      </div>
+      {error ? (
+        <p role="alert" className="text-xs text-clay-700">
+          {error}
+        </p>
+      ) : null}
+    </form>
   );
 }

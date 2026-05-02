@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'node:crypto';
 import { getRazorpay } from '@/lib/razorpay';
 import { getProductById, getVariantById } from '@/lib/products';
+import {
+  clampDiscountForMinTotal,
+  computeSystemDiscountAmount,
+  findSystemDiscountCode,
+} from '@/lib/discounts';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -35,10 +40,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
   }
 
-  const { items, customer, shipping } = body as {
+  const { items, customer, shipping, discountCode } = body as {
     items: IncomingLine[];
     customer: { name: string; email: string; phone: string };
     shipping: IncomingShipping;
+    discountCode?: string;
   };
 
   if (!Array.isArray(items) || items.length === 0) {
@@ -83,7 +89,20 @@ export async function POST(req: NextRequest) {
   }
 
   const shipping_paise = SHIPPING_FLAT_PAISE;
-  const total = subtotal + shipping_paise;
+
+  // Re-validate discount server-side — never trust client
+  let discountAmount = 0;
+  let appliedCode: string | null = null;
+  if (discountCode) {
+    const found = findSystemDiscountCode(discountCode);
+    if (found && subtotal >= found.minOrderPaise) {
+      const raw = computeSystemDiscountAmount(found, subtotal);
+      const clamped = clampDiscountForMinTotal(subtotal, raw, shipping_paise);
+      discountAmount = clamped.discount;
+      appliedCode = found.code;
+    }
+  }
+  const total = subtotal - discountAmount + shipping_paise;
   const event_id = randomUUID();
   const receipt = `KCH-${Date.now().toString(36).toUpperCase()}`;
 
@@ -101,6 +120,8 @@ export async function POST(req: NextRequest) {
         items: JSON.stringify(priced),
         subtotal_paise: String(subtotal),
         shipping_paise: String(shipping_paise),
+        discount_code: appliedCode ?? '',
+        discount_paise: String(discountAmount),
         event_id
       }
     });

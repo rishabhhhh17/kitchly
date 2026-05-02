@@ -28,11 +28,13 @@ declare global {
 }
 
 export default function CheckoutPage() {
-  const { lines, totalPaise, clear } = useCart();
+  const { lines, totalPaise, clear, discountCode, discountPaise, finalTotalPaise } =
+    useCart();
   const router = useRouter();
   const subtotal = totalPaise();
+  const discount = discountPaise();
   const shipping = SHIPPING_FLAT_PAISE;
-  const total = subtotal + shipping;
+  const total = finalTotalPaise(shipping);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -87,6 +89,7 @@ export default function CheckoutPage() {
             quantity: l.quantity
           })),
           customer: { name: form.name, email: form.email, phone: form.phone },
+          discountCode: discountCode ?? undefined,
           shipping: {
             name: form.name,
             email: form.email,
@@ -284,6 +287,13 @@ export default function CheckoutPage() {
 
             <div className="mt-5 space-y-2 border-t border-cream-200 pt-4 text-sm">
               <Row label="Subtotal" value={formatRupees(subtotal)} />
+              {discountCode && discount > 0 ? (
+                <Row
+                  label={`Discount (${discountCode})`}
+                  value={`−${formatRupees(discount)}`}
+                  muted
+                />
+              ) : null}
               <Row
                 label="Shipping"
                 value={shipping === 0 ? 'Free' : formatRupees(shipping)}
